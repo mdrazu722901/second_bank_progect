@@ -12,15 +12,34 @@ loginBtn.addEventListener("click", function() {
 
 const depositBtn = document.getElementById("deposit");
 depositBtn.addEventListener("click", function() {
-    const depositAmount = document.getElementById("depositAmount").value;
-    const depositNumber = parseFloat(depositAmount);
-    document.getElementById("depositAmount").value = "";
 
-    SpanInnerText("Balance", depositNumber)
-    SpanInnerText("currentDeposit", depositNumber)
+        const depositNumber = getInputValue("depositAmount");
+
+        document.getElementById("depositAmount").value = "";
+
+        SpanInnerText("Balance", depositNumber)
+        SpanInnerText("currentDeposit", depositNumber)
 
 
-})
+    })
+    //============================================= withdrawAmount section=============================================================
+const withdrawBtn = document.getElementById("withdrawBtn");
+withdrawBtn.addEventListener("click", function() {
+
+        const withdrawAmountNumber = getInputValue("withdrawAmount");
+        SpanInnerText("withdrawTotal", withdrawAmountNumber);
+        SpanInnerText("Balance", -1 * withdrawAmountNumber);
+        document.getElementById("withdrawAmount").value = "";
+
+
+    })
+    //  ======================================================================
+function getInputValue(id) {
+
+    const withdrawAmount = document.getElementById(id).value;
+    const withdrawAmountNumber = parseFloat(withdrawAmount);
+    return withdrawAmountNumber;
+}
 
 function SpanInnerText(id, depositNumber) {
 
@@ -28,28 +47,4 @@ function SpanInnerText(id, depositNumber) {
     const BalanceNumber = parseFloat(Balance);
     const totalBalance = BalanceNumber + depositNumber;
     document.getElementById(id).innerText = totalBalance;
-}
-//============================================= withdrawAmount section=============================================================
-const withdrawBtn = document.getElementById("withdrawBtn");
-withdrawBtn.addEventListener("click", function() {
-    const withdrawAmount = document.getElementById("withdrawAmount").value;
-    const withdrawAmountNumber = parseFloat(withdrawAmount);
-
-    const withdrawTotal = document.getElementById("withdrawTotal").innerText;
-    const withdrawTotalNumber = parseFloat(withdrawTotal);
-    const all = withdrawAmountNumber + withdrawTotalNumber;
-
-    document.getElementById("withdrawTotal").innerText = all;
-    document.getElementById("withdrawAmount").value = "";
-
-
-    const Balance = document.getElementById("Balance").innerText;
-    const BalanceNumber = parseFloat(Balance);
-    LastTotal = BalanceNumber - withdrawAmountNumber;
-    document.getElementById("Balance").innerText = LastTotal;
-
-})
-
-function WithdrawBalanceCheck() {
-
 }
